@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/23 14:22:18 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/23 16:23:54 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main()
 		if (is_father)
 			wait(NULL);
 		else
-			execve("/bin/ls", (char*[]){"/bin/ls", ""}, NULL);
+			execve("/bin/ls", (char*[]){"/bin/ls", NULL}, NULL);
+		free(line);
 	}
 }

@@ -6,11 +6,16 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 13:22:51 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/18 23:25:21 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/23 21:00:11 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** Don't use this, I just realized that it leaks in case a malloc fails.
+** I was ignorant back when I wrote this.
+*/
 
 static int		fill_arr(char **arr, char const *s, size_t word_count, char c)
 {
