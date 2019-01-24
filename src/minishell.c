@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/24 10:25:03 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/24 11:22:01 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main()
 	while (42)
 	{
 		ft_printf("$> ");
-		if (!get_next_line(0, &line))
+		if (get_next_line(STDIN_FILENO, &line) <= 0)
 			break ;
 		if (line[0])
 		{
