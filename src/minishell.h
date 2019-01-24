@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/24 17:38:26 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/23 23:18:53 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,5 @@
 
 char	**split_line(char *line, int arg_count);
 void	execute_line(char **args);
-void	remember_envp(char **new);
-char	**get_envp(void);
 
 #endif
