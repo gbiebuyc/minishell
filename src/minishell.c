@@ -6,17 +6,20 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/24 11:22:01 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/24 17:25:46 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main()
+int main(int ac, char **av, char **envp)
 {
 	char	*line;
 	char	**args;
 
+	(void)ac;
+	(void)av;
+	remember_envp(true, envp);
 	while (42)
 	{
 		ft_printf("$> ");

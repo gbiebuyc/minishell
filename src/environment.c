@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/24 17:23:46 by gbiebuyc         ###   ########.fr       */
+/*   Created: 2019/01/24 16:41:18 by gbiebuyc          #+#    #+#             */
+/*   Updated: 2019/01/24 17:22:51 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <ft_printf.h>
-# include <stdint.h>
-# include <stdbool.h>
+#include "minishell.h"
 
-char	**split_line(char *line, int arg_count);
-void	execute_line(char **args);
-char	**remember_envp(bool replace, char **new);
-char	**get_envp(void);
+char	**remember_envp(bool replace, char **new)
+{
+	static char	**envp;
 
-#endif
+	return ((envp = replace ? new : envp));
+}
+
+char	**get_envp(void)
+{
+	return (remember_envp(false, NULL));
+}
