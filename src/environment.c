@@ -6,20 +6,25 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 16:41:18 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/24 17:22:51 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/24 17:40:28 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**remember_envp(bool replace, char **new)
+char	***envp_static(void)
 {
 	static char	**envp;
 
-	return ((envp = replace ? new : envp));
+	return (&envp);
+}
+
+void	remember_envp(char **new)
+{
+	*envp_static() = new;
 }
 
 char	**get_envp(void)
 {
-	return (remember_envp(false, NULL));
+	return (*envp_static());
 }

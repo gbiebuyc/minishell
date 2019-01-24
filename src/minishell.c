@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/24 17:25:46 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/24 17:41:30 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	remember_envp(true, envp);
+	remember_envp(envp);
 	while (42)
 	{
 		ft_printf("$> ");
