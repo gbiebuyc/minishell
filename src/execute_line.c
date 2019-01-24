@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 23:14:56 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/24 13:49:01 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/24 15:14:37 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 void	launch_process(char **args)
 {
-	pid_t	is_father;
+	pid_t	pid;
 
-	is_father = fork();
-	if (is_father)
-		wait(NULL);
+	if ((pid = fork()) < 0)
+		ft_putstr_fd("minishell: fork error\n", 2);
+	else if (pid == 0)
+	{
+		if (execve(args[0], args, NULL) == -1)
+			ft_putstr_fd("minishell: execve error\n", 2);
+	}
 	else
-		execve(args[0], args, NULL);
+		waitpid(pid, NULL, 0);
 }
 
 void	builtin_exit(char **args)
