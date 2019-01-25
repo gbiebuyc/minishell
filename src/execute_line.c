@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 23:14:56 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/25 19:17:30 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/25 19:41:33 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ void	builtin_cd(char **args, char ***env)
 	}
 	else
 	{
+		ft_putstr("cd: ");
+		if (access(args[1], F_OK) == -1)
+			ft_putstr("no such file or directory: ");
+		else if (access(args[1], R_OK) == -1)
+			ft_putstr("permission denied: ");
+		else
+			ft_putstr("not a directory: ");
+		ft_putendl(args[1]);
 	}
 }
 
