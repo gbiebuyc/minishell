@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 23:14:56 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/25 18:14:02 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/25 19:17:30 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	builtin_cd(char **args, char ***env)
 	char	buf[MAXPATHLEN];
 
 	getcwd(buf, sizeof(buf));
-	if (chdir(args[1]) == 0)
+	if (chdir(args[1] ? args[1] : env_get_var("HOME", *env)) == 0)
 	{
 		env_set_var("OLDPWD", buf, env);
 		env_set_var("PWD", getcwd(buf, sizeof(buf)), env);
