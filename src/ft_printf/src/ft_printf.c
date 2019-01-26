@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 15:29:35 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/18 23:14:49 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/27 00:08:51 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	parse(char *s, va_list valist, int *print_count, int fd)
 	*print_count = 0;
 	while (*s)
 	{
-		parse_color(&s, print_count, fd);
-		if (*s == '%')
+		if (*s == '{')
+			parse_color(&s, print_count, fd);
+		else if (*s == '%')
 		{
 			s++;
 			d = (t_data){.print_count = print_count, .fd = fd};
@@ -30,7 +31,7 @@ void	parse(char *s, va_list valist, int *print_count, int fd)
 			parse_len_modifier(&s, &d);
 			convert(&s, &d, valist);
 		}
-		else if (*s)
+		else
 		{
 			ft_putchar_fd(*s++, fd);
 			(*print_count)++;
