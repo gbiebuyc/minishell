@@ -6,11 +6,21 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/27 00:14:52 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/27 17:38:09 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_args(char **args)
+{
+	size_t	i;
+
+	i = 0;
+	while (args[i])
+		free(args[i++]);
+	free(args);
+}
 
 int main(int ac, char **av, char **envp)
 {
@@ -29,8 +39,9 @@ int main(int ac, char **av, char **envp)
 		if (line[0])
 		{
 			args = split_line(line, ft_wordcount(line, ' '));
+			tilde_expansion(args);
 			execute_line(args, &env);
-			free(args);
+			free_args(args);
 		}
 		free(line);
 	}

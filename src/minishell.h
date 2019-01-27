@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/25 17:42:24 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/27 17:37:00 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	execute_line(char **args, char ***env);
 void	env_init(char ***env, char **envp);
 char	*env_get_var(char *name, char **env);
 void	env_set_var(char *name, char *value, char ***envptr);
+void	tilde_expansion(char **env);
 
 #endif
