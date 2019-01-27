@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 16:38:44 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/26 23:55:29 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/27 02:57:23 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	parse_color(char **format, int *print_count, int fd)
 		write(fd, "\033[0m", (len2 = 4));
 	else if (ft_strnequ(*format, "{bold}", (len = 6)))
 		write(fd, "\033[1m", (len2 = 4));
-	else
-		len = 0;
+	else if (ft_strnequ(*format, "{", (len = 1)))
+		write(fd, "{", (len2 = 1));
 	(*format) += len;
 	(*print_count) += len2;
 }
