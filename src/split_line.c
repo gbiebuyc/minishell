@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 22:37:22 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/27 17:14:11 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/27 19:12:49 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char	*get_next_arg(char *newstr)
 		ret = s;
 		while (*s && *s != ' ')
 			s++;
-		*s++ = '\0';
+		if (*s)
+			*s++ = '\0';
 	}
 	return (ft_strdup(ret));
 }
