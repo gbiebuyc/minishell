@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 16:38:44 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/27 02:57:23 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/27 02:59:17 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ void	parse_color(char **format, int *print_count, int fd)
 
 	len2 = 0;
 	if (ft_strnequ(*format, "{red}", (len = 5)))
-		write(fd, "\033[31m", (len2 = 5));
+		write(fd, "\e[31m", (len2 = 5));
 	else if (ft_strnequ(*format, "{green}", (len = 7)))
-		write(fd, "\033[32m", (len2 = 5));
+		write(fd, "\e[32m", (len2 = 5));
 	else if (ft_strnequ(*format, "{yellow}", (len = 8)))
-		write(fd, "\033[33m", (len2 = 5));
+		write(fd, "\e[33m", (len2 = 5));
 	else if (ft_strnequ(*format, "{blue}", (len = 6)))
-		write(fd, "\033[34m", (len2 = 5));
+		write(fd, "\e[34m", (len2 = 5));
 	else if (ft_strnequ(*format, "{magenta}", (len = 9)))
-		write(fd, "\033[35m", (len2 = 5));
+		write(fd, "\e[35m", (len2 = 5));
 	else if (ft_strnequ(*format, "{cyan}", (len = 6)))
-		write(fd, "\033[36m", (len2 = 5));
+		write(fd, "\e[36m", (len2 = 5));
 	else if (ft_strnequ(*format, "{eoc}", (len = 5)))
-		write(fd, "\033[0m", (len2 = 4));
+		write(fd, "\e[0m", (len2 = 4));
 	else if (ft_strnequ(*format, "{bold}", (len = 6)))
-		write(fd, "\033[1m", (len2 = 4));
+		write(fd, "\e[1m", (len2 = 4));
 	else if (ft_strnequ(*format, "{", (len = 1)))
 		write(fd, "{", (len2 = 1));
 	(*format) += len;
