@@ -6,43 +6,43 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 22:37:22 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/27 19:12:49 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/28 00:04:20 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_next_arg(char *newstr)
+char	*get_next_token(char *newstr)
 {
 	static char	*s;
-	char		*ret;
+	char		*token;
 
 	if (newstr)
 		s = newstr;
 	while (*s == ' ')
 		s++;
-	ret = NULL;
+	token = NULL;
 	if (*s)
 	{
-		ret = s;
+		token = s;
 		while (*s && *s != ' ')
 			s++;
 		if (*s)
 			*s++ = '\0';
 	}
-	return (ft_strdup(ret));
+	return (ft_strdup(token));
 }
 
 char	**split_line(char *line, int arg_count)
 {
 	int		i;
-	char	**ret;
+	char	**tokens;
 
-	ret = malloc(sizeof(char*) * (arg_count + 1));
+	tokens = malloc(sizeof(char*) * (arg_count + 1));
 	i = 0;
-	ret[i++] = get_next_arg(line);
+	tokens[i++] = get_next_token(line);
 	while (i < arg_count)
-		ret[i++] = get_next_arg(NULL);
-	ret[arg_count] = NULL;
-	return (ret);
+		tokens[i++] = get_next_token(NULL);
+	tokens[arg_count] = NULL;
+	return (tokens);
 }

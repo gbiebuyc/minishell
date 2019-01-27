@@ -6,28 +6,32 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:44:42 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/27 17:42:56 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/27 23:58:26 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	tilde_expansion(char **env)
+void	tilde_expansion(char **tokens)
 {
-	char	*to_free;
+	char	*curr;
+	char	*new;
 
-	while (*env)
+	while ((curr = *tokens))
 	{
-		to_free = *env;
-		if (ft_strequ(*env, "~") || ft_strnequ(*env, "~/", 2))
-			*env = ft_strjoin("$HOME", *env + 1);
-		else if (ft_strequ(*env, "~+") || ft_strnequ(*env, "~+/", 3))
-			*env = ft_strjoin("$PWD", *env + 2);
-		else if (ft_strequ(*env, "~-") || ft_strnequ(*env, "~-/", 3))
-			*env = ft_strjoin("$OLDPWD", *env + 2);
+		if (ft_strequ(curr, "~") || ft_strnequ(curr, "~/", 2))
+			new = ft_strjoin("$HOME", curr + 1);
+		else if (ft_strequ(curr, "~+") || ft_strnequ(curr, "~+/", 3))
+			new = ft_strjoin("$PWD", curr + 2);
+		else if (ft_strequ(curr, "~-") || ft_strnequ(curr, "~-/", 3))
+			new = ft_strjoin("$OLDPWD", curr + 2);
 		else
-			to_free = NULL;
-		free(to_free);
-		env++;
+			new = NULL;
+		if (new)
+		{
+			free(*tokens);
+			*tokens = new;
+		}
+		tokens++;
 	}
 }
