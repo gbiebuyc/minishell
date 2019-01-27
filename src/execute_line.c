@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 23:14:56 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/27 12:24:12 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/27 18:50:32 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ void	launch_process(char **args, char ***env)
 		waitpid(pid, NULL, 0);
 }
 
+char	*getcwd_static(void)
+{
+	static char	buf[MAXPATHLEN];
+
+	return (getcwd(buf, sizeof(buf)));
+}
+
 void	builtin_exit(char **args)
 {
 	if (args[1])
@@ -39,13 +46,19 @@ void	builtin_exit(char **args)
 
 void	builtin_cd(char **args, char ***env)
 {
-	char	buf[MAXPATHLEN];
+	char	*new_dir;
+	char	*oldpwd;
 
-	getcwd(buf, sizeof(buf));
-	if (chdir(args[1] ? args[1] : env_get_var("HOME", *env)) == 0)
+	new_dir = args[1];
+	if (!new_dir)
+		new_dir = env_get_var("HOME", *env);
+	if (!new_dir)
+		return (ft_putstr_fd("minishell: cd: HOME not set\n", 2));
+	oldpwd = getcwd_static();
+	if (chdir(new_dir) == 0)
 	{
-		env_set_var("OLDPWD", buf, env);
-		env_set_var("PWD", getcwd(buf, sizeof(buf)), env);
+		env_set_var("OLDPWD", oldpwd, env);
+		env_set_var("PWD", getcwd_static(), env);
 	}
 	else
 	{
