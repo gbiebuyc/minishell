@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/27 17:38:09 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 01:48:49 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main(int ac, char **av, char **envp)
 	env_init(&env, envp);
 	while (42)
 	{
-		ft_printf("{green}{bold}%s{eoc}> ", env_get_var("PWD", env));
+		ft_printf("{green}{bold}%s{eoc}> ", ft_getenv("PWD", env));
 		if (get_next_line(STDIN_FILENO, &line) <= 0)
 			break ;
 		if (line[0])

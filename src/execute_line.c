@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 23:14:56 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/27 18:50:32 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 01:48:24 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void	builtin_cd(char **args, char ***env)
 
 	new_dir = args[1];
 	if (!new_dir)
-		new_dir = env_get_var("HOME", *env);
+		new_dir = ft_getenv("HOME", *env);
 	if (!new_dir)
 		return (ft_putstr_fd("minishell: cd: HOME not set\n", 2));
 	oldpwd = getcwd_static();
 	if (chdir(new_dir) == 0)
 	{
-		env_set_var("OLDPWD", oldpwd, env);
-		env_set_var("PWD", getcwd_static(), env);
+		ft_setenv("OLDPWD", oldpwd, env);
+		ft_setenv("PWD", getcwd_static(), env);
 	}
 	else
 	{

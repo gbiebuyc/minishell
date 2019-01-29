@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/27 18:28:45 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 01:47:30 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,49 +27,90 @@ void	env_init(char ***env, char **envp)
 		i++;
 	}
 	(*env)[i] = NULL;
-	if (!env_get_var("PWD", *env))
-		env_set_var("PWD", getcwd_static(), env);
-	if (!env_get_var("OLDPWD", *env))
-		env_set_var("OLDPWD", getcwd_static(), env);
+	if (!ft_getenv("PWD", *env))
+		ft_setenv("PWD", getcwd_static(), env);
+	if (!ft_getenv("OLDPWD", *env))
+		ft_setenv("OLDPWD", getcwd_static(), env);
 }
 
-char	*env_get_var(char *name, char **env)
+size_t	shellvar_len(char *var)
 {
+	size_t	i;
+
+	i = 0;
+	while (ft_isalnum(var[i]) || var[i] == '_')
+		i++;
+	return (i);
+}
+
+bool	shellvar_equ(char *var1, char *var2)
+{
+	size_t	len1;
+	size_t	len2;
+
+	len1 = shellvar_len(var1);
+	len2 = shellvar_len(var2);
+	if (len1 != len2)
+		return (false);
+	return (ft_strnequ(var1, var2, len1));
+}
+
+char	*ft_getenv(char *name, char **env)
+{
+	char	*value;
+
 	while (*env)
 	{
-		if (ft_strnequ(name, *env, ft_strlen(name)) &&
-				(*env)[ft_strlen(name) + 1])
-			return (*env + ft_strlen(name) + 1);
+		if (shellvar_equ(name, *env) &&
+				(value = ft_strchr(*env, '=') + 1)[0])
+			return (value);
 		env++;
 	}
 	return (NULL);
 }
 
-void	env_set_var(char *name, char *value, char ***envptr)
+void	ft_putenv(char *string, char ***envptr)
 {
 	int		i;
 	char	**env;
 
-	// todo: error handling
-	if (!name || !value)
-		return ;
 	env = *envptr;
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strnequ(name, env[i], ft_strlen(name)))
+		if (shellvar_equ(string, env[i]))
 		{
 			free(env[i]);
-			env[i] = malloc(ft_strlen(name) + 1 + ft_strlen(value));
-			ft_strcat(ft_strcat(ft_strcpy(env[i], name), "="), value);
+			env[i] = string;
 			return ;
 		}
 		i++;
 	}
-	*envptr = malloc(sizeof(char*) * (i + 2));
+	if (!(*envptr = malloc(sizeof(char*) * (i + 2))))
+	{
+		ft_putstr_fd("minishell: malloc error\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	ft_memcpy(*envptr, env, sizeof(char*) * i);
 	free(env);
-	(*envptr)[i] = malloc(ft_strlen(name) + 1 + ft_strlen(value));
-	ft_strcat(ft_strcat(ft_strcpy((*envptr)[i], name), "="), value);
+	(*envptr)[i] = string;
 	(*envptr)[i + 1] = NULL;
 }
+
+void	ft_setenv(char *name, char *value, char ***env)
+{
+	char	*string;
+
+	if (!(string = malloc(ft_strlen(name) + 1 + ft_strlen(value))))
+	{
+		ft_putstr_fd("minishell: malloc error\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	ft_strcat(ft_strcat(ft_strcpy(string, name), "="), value);
+	ft_putenv(string, env);
+}
+/*
+void	ft_unsetenv(char *name, char ***envptr)
+{
+}
+*/
