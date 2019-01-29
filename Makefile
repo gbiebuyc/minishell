@@ -6,7 +6,7 @@
 #    By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/17 11:35:12 by gbiebuyc          #+#    #+#              #
-#    Updated: 2019/01/27 17:38:48 by gbiebuyc         ###   ########.fr        #
+#    Updated: 2019/01/29 14:32:55 by gbiebuyc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRC = src/minishell.c \
 	  src/split_line.c \
 	  src/execute_line.c \
 	  src/environment.c \
-	  src/expansions.c
+	  src/expansions.c \
+	  src/misc.c
 OBJ = $(SRC:.c=.o)
 FTPRINTF_DIR = src/ft_printf
 CFLAGS = -I $(FTPRINTF_DIR) -Wall -Wextra -Werror

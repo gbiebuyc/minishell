@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 22:37:22 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/28 00:04:20 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 14:32:01 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ char	**split_line(char *line, int arg_count)
 	int		i;
 	char	**tokens;
 
-	tokens = malloc(sizeof(char*) * (arg_count + 1));
+	if (!(tokens = malloc(sizeof(char*) * (arg_count + 1))))
+		malloc_error();
 	i = 0;
 	tokens[i++] = get_next_token(line);
 	while (i < arg_count)

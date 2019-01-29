@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 03:12:13 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 14:26:03 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ size_t	shellvar_len(char *var);
 char	*ft_getenv(char *name, char **env);
 void	ft_putenv(char *string, char ***envptr);
 void	ft_setenv(char *name, char *value, char ***env);
+void	malloc_error(void);
 
 #endif

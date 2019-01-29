@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 13:31:32 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 14:27:48 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	env_init(char ***env, char **envp)
 	i = 0;
 	while (envp[i])
 		i++;
-	*env = malloc(sizeof(**env) * (i + 1));
+	if (!(*env = malloc(sizeof(**env) * (i + 1))))
+		malloc_error();
 	i = 0;
 	while (envp[i])
 	{
@@ -82,10 +83,7 @@ void	ft_putenv(char *string, char ***envptr)
 		i++;
 	}
 	if (!(*envptr = malloc(sizeof(char*) * (i + 2))))
-	{
-		ft_putstr_fd("minishell: malloc error\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		malloc_error();
 	ft_memcpy(*envptr, env, sizeof(char*) * i);
 	free(env);
 	(*envptr)[i] = string;
@@ -97,10 +95,7 @@ void	ft_setenv(char *name, char *value, char ***env)
 	char	*string;
 
 	if (!(string = malloc(ft_strlen(name) + 1 + ft_strlen(value) + 1)))
-	{
-		ft_putstr_fd("minishell: malloc error\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		malloc_error();
 	ft_strcat(ft_strcat(ft_strcpy(string, name), "="), value);
 	ft_putenv(string, env);
 }
