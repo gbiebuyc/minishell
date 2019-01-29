@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 01:47:30 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 02:52:51 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_setenv(char *name, char *value, char ***env)
 {
 	char	*string;
 
-	if (!(string = malloc(ft_strlen(name) + 1 + ft_strlen(value))))
+	if (!(string = malloc(ft_strlen(name) + 1 + ft_strlen(value) + 1)))
 	{
 		ft_putstr_fd("minishell: malloc error\n", 2);
 		exit(EXIT_FAILURE);
