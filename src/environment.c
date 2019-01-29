@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 14:27:48 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 17:55:49 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,18 @@ void	ft_setenv(char *name, char *value, char ***env)
 	ft_strcat(ft_strcat(ft_strcpy(string, name), "="), value);
 	ft_putenv(string, env);
 }
-/*
-void	ft_unsetenv(char *name, char ***envptr)
+
+void	ft_unsetenv(char *name, char **env)
 {
+	bool	found;
+
+	found = false;
+	while (*env)
+	{
+		if (!found && shellvar_equ(name, *env))
+			found = true;
+		if (found)
+			*env = *(env + 1);
+		env++;
+	}
 }
-*/

@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 16:05:46 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 17:49:30 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	env_init(char ***env, char **envp);
 char	*ft_getenv(char *name, char **env);
 void	ft_putenv(char *string, char ***envptr);
 void	ft_setenv(char *name, char *value, char ***env);
+void	ft_unsetenv(char *name, char **env);
 void	tilde_expansion(char **env);
 void	param_expansion(char **tokens, char **env);
 size_t	shellvar_len(char *var);
@@ -38,5 +39,6 @@ void	builtin_exit(char **args);
 void	builtin_cd(char **args, char ***env);
 void	builtin_echo(char **args);
 void	builtin_setenv(char **args, char ***env);
+void	builtin_unsetenv(char **args, char **env);
 
 #endif

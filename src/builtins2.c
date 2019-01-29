@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:51:25 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 16:17:12 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:09:05 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,12 @@ void	builtin_setenv(char **args, char ***env)
 		ft_setenv(args[1], args[2], env);
 	else
 		print_env(*env);
+}
+
+void	builtin_unsetenv(char **args, char **env)
+{
+	if (!*args++ || !*args)
+		ft_putstr_fd("unsetenv: Too few arguments.\n", 2);
+	while (*args)
+		ft_unsetenv(*args++, env);
 }
