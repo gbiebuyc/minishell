@@ -6,7 +6,7 @@
 #    By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/17 11:35:12 by gbiebuyc          #+#    #+#              #
-#    Updated: 2019/01/29 15:04:58 by gbiebuyc         ###   ########.fr        #
+#    Updated: 2019/01/29 16:05:58 by gbiebuyc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC = src/minishell.c \
 	  src/environment.c \
 	  src/expansions.c \
 	  src/builtins1.c \
+	  src/builtins2.c \
 	  src/misc.c
 OBJ = $(SRC:.c=.o)
 FTPRINTF_DIR = src/ft_printf
