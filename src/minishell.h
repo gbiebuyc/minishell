@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 15:03:39 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 15:30:28 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ void	malloc_error(void);
 char	*getcwd_static(void);
 void	builtin_exit(char **args);
 void	builtin_cd(char **args, char ***env);
+void	builtin_echo(char **args);
 
 #endif

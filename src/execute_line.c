@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 23:14:56 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 15:01:03 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 15:31:16 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	execute_line(char **args, char ***env)
 		builtin_exit(args);
 	else if (ft_strequ(args[0], "cd"))
 		builtin_cd(args, env);
+	else if (ft_strequ(args[0], "echo"))
+		builtin_echo(args);
 	else
 		launch_process(args, env);
 }

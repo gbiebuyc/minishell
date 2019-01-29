@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:01:32 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 15:02:11 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 15:30:16 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,28 @@ void	builtin_cd(char **args, char ***env)
 			ft_dprintf(2, "cd: permission denied: %s\n", new_dir);
 		else
 			ft_dprintf(2, "cd: not a directory: %s\n", new_dir);
+	}
+}
+
+void	builtin_echo(char **args)
+{
+	bool	trailing_newline;
+
+	trailing_newline = true;
+	if (!*args++ || !*args)
+		return (ft_putchar('\n'));
+	if (ft_strequ(*args, "-n"))
+	{
+		trailing_newline = false;
+		args++;
+	}
+	while (*args)
+	{
+		ft_putstr(*args);
+		if (*(args + 1))
+			ft_putchar(' ');
+		else if (trailing_newline)
+			ft_putchar('\n');
+		args++;
 	}
 }
