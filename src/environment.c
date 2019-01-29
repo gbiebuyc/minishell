@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 02:52:51 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 13:31:32 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ void	env_init(char ***env, char **envp)
 		i++;
 	}
 	(*env)[i] = NULL;
-	if (!ft_getenv("PWD", *env))
-		ft_setenv("PWD", getcwd_static(), env);
-	if (!ft_getenv("OLDPWD", *env))
-		ft_setenv("OLDPWD", getcwd_static(), env);
+	ft_setenv("PWD", getcwd_static(), env);
+	ft_setenv("OLDPWD", getcwd_static(), env);
 }
 
 size_t	shellvar_len(char *var)
@@ -57,13 +55,10 @@ bool	shellvar_equ(char *var1, char *var2)
 
 char	*ft_getenv(char *name, char **env)
 {
-	char	*value;
-
 	while (*env)
 	{
-		if (shellvar_equ(name, *env) &&
-				(value = ft_strchr(*env, '=') + 1)[0])
-			return (value);
+		if (shellvar_equ(name, *env))
+			return (ft_strchr(*env, '=') + 1);
 		env++;
 	}
 	return (NULL);
