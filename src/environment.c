@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 17:55:49 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/29 19:34:11 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,12 @@ size_t	shellvar_len(char *var)
 
 bool	shellvar_equ(char *var1, char *var2)
 {
-	size_t	len1;
-	size_t	len2;
+	size_t	len;
 
-	len1 = shellvar_len(var1);
-	len2 = shellvar_len(var2);
-	if (len1 != len2)
+	len = shellvar_len(var1);
+	if (len != shellvar_len(var2))
 		return (false);
-	return (ft_strnequ(var1, var2, len1));
+	return (ft_strnequ(var1, var2, len));
 }
 
 char	*ft_getenv(char *name, char **env)
