@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 22:37:22 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 14:32:01 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/31 04:32:41 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ char	*get_next_token(char *newstr)
 		if (*s)
 			*s++ = '\0';
 	}
-	return (ft_strdup(token));
+	if (token && !(token = ft_strdup(token)))
+		malloc_error();
+	return (token);
 }
 
 char	**split_line(char *line, int arg_count)

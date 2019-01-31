@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:44:42 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 14:30:48 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/31 02:04:43 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	expand_one_token_param(char **token_ptr, char **env)
 	token += (*token == '{') ? 1 : 0;
 	if (!(subst = ft_getenv(token, env)))
 		subst = "";
-	token += shellvar_len(token);
+	token += shellvar_len(token, false);
 	token += (*token == '}') ? 1 : 0;
 	right_start = token;
 	if (!(token = malloc(left_len + ft_strlen(subst) + ft_strlen(right_start) + 1)))
