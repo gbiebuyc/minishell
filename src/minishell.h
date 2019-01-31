@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/31 02:05:24 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/31 18:32:37 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	builtin_cd(char **args, char ***env);
 void	builtin_echo(char **args);
 void	builtin_setenv(char **args, char ***env);
 void	builtin_unsetenv(char **args, char **env);
+int		get_shlvl(char **env);
 
 #endif
