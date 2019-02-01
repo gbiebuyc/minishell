@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/31 18:43:09 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/01/31 21:26:27 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ void	env_init(char ***env, char **envp)
 		i++;
 	}
 	(*env)[i] = NULL;
-	ft_setenv("PWD", getcwd_static(), env);
-	ft_setenv("OLDPWD", getcwd_static(), env);
-	ft_setenv("SHLVL", ft_itoa_static(get_shlvl(*env) + 1), env);
 }
 
 size_t	shellvar_len(char *var, bool specialchars)

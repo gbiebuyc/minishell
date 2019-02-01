@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/31 18:32:37 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/01 18:10:00 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <stdint.h>
 # include <stdbool.h>
 
-char	**split_line(char *line, int arg_count);
 void	execute_line(char **args, char ***env);
 void	env_init(char ***env, char **envp);
 char	*ft_getenv(char *name, char **env);

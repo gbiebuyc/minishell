@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 03:12:25 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/01 17:59:19 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	env_init(&env, envp);
+	ft_setenv("PWD", getcwd_static(), &env);
+	ft_setenv("SHLVL", ft_itoa_static(get_shlvl(env) + 1), &env);
 	while (42)
 	{
 		ft_printf("{green}{bold}%s{eoc}> ", ft_getenv("PWD", env));
@@ -38,7 +40,8 @@ int main(int ac, char **av, char **envp)
 			break ;
 		if (line[0])
 		{
-			args = split_line(line, ft_wordcount(line, ' '));
+			if (!(args = ft_strsplit(line, ' ')))
+				malloc_error();
 			tilde_expansion(args);
 			param_expansion(args, env);
 			execute_line(args, &env);

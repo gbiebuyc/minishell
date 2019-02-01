@@ -6,34 +6,34 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 13:22:51 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/23 21:00:11 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/01 18:02:24 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** Don't use this, I just realized that it leaks in case a malloc fails.
-** I was ignorant back when I wrote this.
-*/
-
-static int		fill_arr(char **arr, char const *s, size_t word_count, char c)
+static bool		fill_arr(char **arr, const char *s, char c)
 {
-	size_t len;
+	size_t word_len;
 
-	while (word_count--)
+	if (!*s)
 	{
-		while (*s == c)
-			s++;
-		len = 0;
-		while (s[len] && s[len] != c)
-			len++;
-		if (!(*arr++ = ft_strsub(s, 0, len)))
-			return (0);
-		s += len;
+		*arr = NULL;
+		return (true);
 	}
-	*arr = 0;
-	return (1);
+	while (*s == c)
+		s++;
+	word_len = 0;
+	while (s[word_len] && s[word_len] != c)
+		word_len++;
+	if (!(*arr = ft_strsub(s, 0, word_len)))
+		return (false);
+	if (!fill_arr(arr + 1, s + word_len, c))
+	{
+		free(*arr);
+		return (false);
+	}
+	return (true);
 }
 
 char			**ft_strsplit(char const *s, char c)
@@ -44,7 +44,10 @@ char			**ft_strsplit(char const *s, char c)
 		return (NULL);
 	if (!(arr = (char**)malloc(sizeof(char*) * (ft_wordcount(s, c) + 1))))
 		return (NULL);
-	if (!fill_arr(arr, s, ft_wordcount(s, c), c))
+	if (!fill_arr(arr, s, c))
+	{
+		free(arr);
 		return (NULL);
+	}
 	return (arr);
 }
