@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 13:22:51 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/01 18:02:24 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/01 18:52:45 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static bool		fill_arr(char **arr, const char *s, char c)
 {
 	size_t word_len;
 
+	while (*s == c)
+		s++;
 	if (!*s)
 	{
 		*arr = NULL;
 		return (true);
 	}
-	while (*s == c)
-		s++;
 	word_len = 0;
 	while (s[word_len] && s[word_len] != c)
 		word_len++;
