@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 23:14:56 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/03 22:26:53 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/03 22:50:38 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,8 @@ bool	search_path(char **args, char **env)
 	char	*completepath;
 	int		i;
 
-	if (!(paths = ft_strsplit(ft_getenv("PATH", env), ':')) || !paths[0])
-	{
-		freestrarr(paths);
+	if (!(paths = ft_strsplit(ft_getenv("PATH", env), ':')))
 		return (false);
-	}
 	i = 0;
 	while (paths[i])
 	{
