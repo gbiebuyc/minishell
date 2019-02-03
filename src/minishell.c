@@ -6,21 +6,11 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/01 17:59:19 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/03 22:27:55 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_args(char **args)
-{
-	size_t	i;
-
-	i = 0;
-	while (args[i])
-		free(args[i++]);
-	free(args);
-}
 
 int main(int ac, char **av, char **envp)
 {
@@ -45,7 +35,7 @@ int main(int ac, char **av, char **envp)
 			tilde_expansion(args);
 			param_expansion(args, env);
 			execute_line(args, &env);
-			free_args(args);
+			freestrarr(args);
 		}
 		free(line);
 	}

@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:16:53 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/03 03:13:17 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/03 04:13:41 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ int		get_shlvl(char **env)
 char	*join_path(char *left, char *right)
 {
 	char	*path;
+	size_t	left_len;
 
 	if (!left || !right)
 		return (NULL);
-	if (left[ft_strlen(left) - 1] == '/')
+	left_len = ft_strlen(left);
+	if (left_len == 0 || left[left_len - 1] == '/')
 		return (ft_strjoin(left, right));
 	if (!(path = malloc(sizeof(char) *
 					(ft_strlen(left) + ft_strlen(right) + 2))))
