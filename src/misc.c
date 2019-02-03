@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:16:53 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/31 18:42:52 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/03 03:13:17 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,19 @@ int		get_shlvl(char **env)
 	if (!(shlvl = ft_getenv("SHLVL", env)))
 		shlvl = "0";
 	return (ft_atoi(shlvl));
+}
+
+char	*join_path(char *left, char *right)
+{
+	char	*path;
+
+	if (!left || !right)
+		return (NULL);
+	if (left[ft_strlen(left) - 1] == '/')
+		return (ft_strjoin(left, right));
+	if (!(path = malloc(sizeof(char) *
+					(ft_strlen(left) + ft_strlen(right) + 2))))
+		return (NULL);
+	ft_strcat(ft_strcat(ft_strcpy(path, left), "/"), right);
+	return (path);
 }
