@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/04 14:48:21 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 15:24:16 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	shell_loop(char ***env)
 	}
 }
 
-int main(int ac, char **av, char **envp)
+int		main(int ac, char **av, char **envp)
 {
 	char	**env;
 
@@ -45,4 +45,5 @@ int main(int ac, char **av, char **envp)
 	ft_setenv("PWD", getcwd_static(), &env);
 	ft_setenv("SHLVL", ft_itoa_static(get_shlvl(env) + 1), &env);
 	shell_loop(&env);
+	freestrarr(env);
 }

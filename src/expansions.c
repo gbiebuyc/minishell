@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:44:42 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/31 02:04:43 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 15:44:39 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,19 @@ void	tilde_expansion(char **tokens)
 	}
 }
 
-bool	expand_one_token_param(char **token_ptr, char **env)
+char	*expand_one_token_param(char *token, char **env)
 {
-	char	*token;
 	size_t	left_len;
 	char	*subst;
 	char	*right_start;
+	char	*tokencpy;
+	char	*new;
 
-	token = *token_ptr;
+	tokencpy = token;
 	left_len = 0;
 	while (token[left_len] != '$')
 		if (token[left_len++] == '\0')
-			return (false);
+			return (NULL);
 	token += left_len + 1;
 	token += (*token == '{') ? 1 : 0;
 	if (!(subst = ft_getenv(token, env)))
@@ -55,22 +56,26 @@ bool	expand_one_token_param(char **token_ptr, char **env)
 	token += shellvar_len(token, false);
 	token += (*token == '}') ? 1 : 0;
 	right_start = token;
-	if (!(token = malloc(left_len + ft_strlen(subst) + ft_strlen(right_start) + 1)))
+	if (!(new = malloc(left_len + ft_strlen(subst) +
+					ft_strlen(right_start) + 1)))
 		malloc_error();
-	token[0] = '\0';
-	ft_strncat(token, *token_ptr, left_len);
-	ft_strcat(ft_strcat(token, subst), right_start);
-	free(*token_ptr);
-	*token_ptr = token;
-	return (true);
+	new[0] = '\0';
+	ft_strncat(new, tokencpy, left_len);
+	ft_strcat(ft_strcat(new, subst), right_start);
+	return (new);
 }
 
 void	param_expansion(char **tokens, char **env)
 {
+	char	*new;
+
 	while (*tokens)
 	{
-		while (expand_one_token_param(&*tokens, env))
-			;
+		while ((new = expand_one_token_param(*tokens, env)))
+		{
+			free(*tokens);
+			*tokens = new;
+		}
 		tokens++;
 	}
 }

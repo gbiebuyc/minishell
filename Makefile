@@ -6,7 +6,7 @@
 #    By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/17 11:35:12 by gbiebuyc          #+#    #+#              #
-#    Updated: 2019/02/04 14:48:58 by gbiebuyc         ###   ########.fr        #
+#    Updated: 2019/02/04 16:08:55 by gbiebuyc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell
 SRC = src/main.c \
 	  src/execute_line.c \
 	  src/environment.c \
+	  src/variables.c \
 	  src/expansions.c \
 	  src/builtins1.c \
 	  src/builtins2.c \

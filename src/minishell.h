@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/04 02:42:47 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 16:08:07 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_unsetenv(char *name, char **env);
 void	tilde_expansion(char **env);
 void	param_expansion(char **tokens, char **env);
 size_t	shellvar_len(char *var, bool specialchars);
+bool	shellvar_equ(char *var1, char *var2, bool specialchars);
 void	malloc_error(void);
 char	*getcwd_static(void);
 void	builtin_exit(char **args);
