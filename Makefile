@@ -6,12 +6,12 @@
 #    By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/17 11:35:12 by gbiebuyc          #+#    #+#              #
-#    Updated: 2019/02/01 18:09:34 by gbiebuyc         ###   ########.fr        #
+#    Updated: 2019/02/04 14:48:58 by gbiebuyc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-SRC = src/minishell.c \
+SRC = src/main.c \
 	  src/execute_line.c \
 	  src/environment.c \
 	  src/expansions.c \
