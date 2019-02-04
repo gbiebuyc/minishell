@@ -6,13 +6,13 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 23:14:56 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/03 23:38:47 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 02:43:12 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	launch_process(char **args, char ***env)
+void	launch_process(char **args, char **env)
 {
 	pid_t		pid;
 	struct stat	st;
@@ -21,7 +21,7 @@ void	launch_process(char **args, char ***env)
 		ft_putstr_fd("minishell: fork error\n", 2);
 	else if (pid == 0)
 	{
-		if (execve(args[0], args, *env) == -1)
+		if (execve(args[0], args, env) == -1)
 		{
 			if (access(args[0], F_OK) == -1)
 				ft_dprintf(2, "%s: No such file or directory\n", args[0]);
@@ -66,9 +66,7 @@ bool	search_path(char **args, char **env)
 
 void	execute_line(char **args, char ***env)
 {
-	if (ft_strchr(args[0], '/'))
-		launch_process(args, env);
-	else if (ft_strequ(args[0], "exit"))
+	if (ft_strequ(args[0], "exit"))
 		builtin_exit(args);
 	else if (ft_strequ(args[0], "cd"))
 		builtin_cd(args, env);
@@ -80,8 +78,8 @@ void	execute_line(char **args, char ***env)
 		builtin_unsetenv(args, *env);
 	else if (ft_strequ(args[0], "env"))
 		builtin_env(args, *env);
-	else if (search_path(args, *env))
-		launch_process(args, env);
+	else if (ft_strchr(args[0], '/') || search_path(args, *env))
+		launch_process(args, *env);
 	else
 		ft_dprintf(STDERR_FILENO, "%s: command not found\n", args[0]);
 }

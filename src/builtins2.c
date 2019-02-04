@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:51:25 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/04 02:14:35 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 02:43:36 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	builtin_env(char **args, char **env)
 	{
 		if (!ft_strchr(args[0], '/'))
 			search_path(args, env);
-		launch_process(args, &modified_env);
+		launch_process(args, modified_env);
 	}
 	else
 		print_env(modified_env);
