@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 23:14:56 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/03 22:50:38 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/03 23:38:47 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	execute_line(char **args, char ***env)
 		builtin_setenv(args, env);
 	else if (ft_strequ(args[0], "unsetenv"))
 		builtin_unsetenv(args, *env);
+	else if (ft_strequ(args[0], "env"))
+		builtin_env(args, *env);
 	else if (search_path(args, *env))
 		launch_process(args, env);
 	else

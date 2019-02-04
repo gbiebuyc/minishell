@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:51:25 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 18:09:05 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 00:59:22 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,46 @@ void	builtin_unsetenv(char **args, char **env)
 		ft_putstr_fd("unsetenv: Too few arguments.\n", 2);
 	while (*args)
 		ft_unsetenv(*args++, env);
+}
+
+bool	parse_options(char *options, bool *empty)
+{
+	while (*++options)
+	{
+		if (*options == 'i')
+			*empty = true;
+		else
+		{
+			ft_dprintf(2, "env: invalid option -- '%c'\n", *options);
+			return (false);
+		}
+	}
+	return (true);
+}
+
+void	builtin_env(char **args, char **env)
+{
+	char	**modified_env;
+	bool	empty;
+
+	empty = false;
+	while (*++args && (*args)[0] == '-')
+		if (!parse_options(*args, &empty))
+			return ;
+	if (!empty)
+		env_init(&modified_env, env);
+	else
+	{
+		if (!(modified_env = malloc(sizeof(*modified_env) * 1)))
+			malloc_error();
+		modified_env[0] = NULL;
+	}
+	while (*args && ft_strchr(*args, '='))
+		ft_putenv(ft_strdup(*args++), &modified_env);
+	if (!*args)
+		return (print_env(modified_env));
+	if (!ft_strchr(args[0], '/'))
+		search_path(args, env);
+	launch_process(args, &modified_env);
+	freestrarr(modified_env);
 }
