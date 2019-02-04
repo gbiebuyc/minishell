@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 16:11:33 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/03 22:30:02 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 01:46:24 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 size_t			ft_wordcount(const char *s, char c);
 void			freestrarr(char **arr);
+char			**dupstrarr(char **arr1);
 int				get_next_line(const int fd, char **line);
 double			ft_atof(const char *s);
 char			*ft_itoa_static(intmax_t n);

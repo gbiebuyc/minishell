@@ -6,28 +6,25 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/31 21:26:27 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 02:11:56 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env_init(char ***env, char **envp)
+void	env_init(char ***new, char **env)
 {
-	int i;
-
-	i = 0;
-	while (envp[i])
-		i++;
-	if (!(*env = malloc(sizeof(**env) * (i + 1))))
-		malloc_error();
-	i = 0;
-	while (envp[i])
+	if (env)
 	{
-		(*env)[i] = ft_strdup(envp[i]);
-		i++;
+		if (!(*new = dupstrarr(env)))
+			malloc_error();
 	}
-	(*env)[i] = NULL;
+	else
+	{
+		if (!(*new = malloc(sizeof(**new))))
+			malloc_error();
+		(*new)[0] = NULL;
+	}
 }
 
 size_t	shellvar_len(char *var, bool specialchars)

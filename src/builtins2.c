@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:51:25 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/04 00:59:22 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 02:14:35 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,16 @@ void	builtin_env(char **args, char **env)
 	if (!empty)
 		env_init(&modified_env, env);
 	else
-	{
-		if (!(modified_env = malloc(sizeof(*modified_env) * 1)))
-			malloc_error();
-		modified_env[0] = NULL;
-	}
+		env_init(&modified_env, NULL);
 	while (*args && ft_strchr(*args, '='))
 		ft_putenv(ft_strdup(*args++), &modified_env);
-	if (!*args)
-		return (print_env(modified_env));
-	if (!ft_strchr(args[0], '/'))
-		search_path(args, env);
-	launch_process(args, &modified_env);
+	if (*args)
+	{
+		if (!ft_strchr(args[0], '/'))
+			search_path(args, env);
+		launch_process(args, &modified_env);
+	}
+	else
+		print_env(modified_env);
 	freestrarr(modified_env);
 }

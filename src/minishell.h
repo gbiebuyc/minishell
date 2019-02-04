@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/03 23:56:09 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 02:12:46 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 void	execute_line(char **args, char ***env);
 bool	search_path(char **args, char **env);
 void	launch_process(char **args, char ***env);
-void	env_init(char ***env, char **envp);
+void	env_init(char ***newenv, char **env);
 char	*ft_getenv(char *name, char **env);
 void	ft_putenv(char *string, char ***envptr);
 void	ft_setenv(char *name, char *value, char ***env);
