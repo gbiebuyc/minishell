@@ -6,34 +6,31 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:01:32 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/01/29 15:30:16 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/05 11:39:08 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_exit(char **args)
-{
-	if (args[1])
-		return (ft_putstr_fd("exit: too many arguments\n", 2));
-	exit(EXIT_SUCCESS);
-}
-
-void	builtin_cd(char **args, char ***env)
+int		builtin_cd(char **args, char ***env)
 {
 	char	*new_dir;
 	char	*oldpwd;
 
 	if (!(new_dir = args[1]))
 		if (!(new_dir = ft_getenv("HOME", *env)))
-			return (ft_putstr_fd("minishell: cd: HOME not set\n", 2));
+		{
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+			return (EXIT_FAILURE);
+		}
 	if (new_dir[0] == '\0')
-		return ;
+		return (EXIT_SUCCESS);
 	oldpwd = getcwd_static();
 	if (chdir(new_dir) == 0)
 	{
 		ft_setenv("OLDPWD", oldpwd, env);
 		ft_setenv("PWD", getcwd_static(), env);
+		return (EXIT_SUCCESS);
 	}
 	else
 	{
@@ -43,28 +40,33 @@ void	builtin_cd(char **args, char ***env)
 			ft_dprintf(2, "cd: permission denied: %s\n", new_dir);
 		else
 			ft_dprintf(2, "cd: not a directory: %s\n", new_dir);
+		return (EXIT_FAILURE);
 	}
 }
 
-void	builtin_echo(char **args)
+int		builtin_echo(char **args)
 {
 	bool	trailing_newline;
 
 	trailing_newline = true;
 	if (!*args++ || !*args)
-		return (ft_putchar('\n'));
-	if (ft_strequ(*args, "-n"))
+		ft_putchar('\n');
+	else
 	{
-		trailing_newline = false;
-		args++;
+		if (ft_strequ(*args, "-n"))
+		{
+			trailing_newline = false;
+			args++;
+		}
+		while (*args)
+		{
+			ft_putstr(*args);
+			if (*(args + 1))
+				ft_putchar(' ');
+			else if (trailing_newline)
+				ft_putchar('\n');
+			args++;
+		}
 	}
-	while (*args)
-	{
-		ft_putstr(*args);
-		if (*(args + 1))
-			ft_putchar(' ');
-		else if (trailing_newline)
-			ft_putchar('\n');
-		args++;
-	}
+	return (EXIT_SUCCESS);
 }

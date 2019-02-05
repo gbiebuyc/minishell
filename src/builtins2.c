@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:51:25 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/04 03:15:25 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/04 20:04:40 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_env(char **env)
 		ft_putendl(*env++);
 }
 
-void	builtin_setenv(char **args, char ***env)
+int		builtin_setenv(char **args, char ***env)
 {
 	if (args[0] && args[1] && args[2] && args[3])
 		ft_putstr_fd("setenv: Too many arguments.\n", 2);
@@ -26,14 +26,16 @@ void	builtin_setenv(char **args, char ***env)
 		ft_setenv(args[1], args[2], env);
 	else
 		print_env(*env);
+	return (EXIT_SUCCESS);
 }
 
-void	builtin_unsetenv(char **args, char **env)
+int		builtin_unsetenv(char **args, char **env)
 {
 	if (!*args++ || !*args)
 		ft_putstr_fd("unsetenv: Too few arguments.\n", 2);
 	while (*args)
 		ft_unsetenv(*args++, env);
+	return (EXIT_SUCCESS);
 }
 
 bool	parse_options(char *options, bool *empty)
@@ -51,7 +53,7 @@ bool	parse_options(char *options, bool *empty)
 	return (true);
 }
 
-void	builtin_env(char **args, char **env)
+int		builtin_env(char **args, char **env)
 {
 	char	**modified_env;
 	bool	empty;
@@ -59,7 +61,7 @@ void	builtin_env(char **args, char **env)
 	empty = false;
 	while (*++args && (*args)[0] == '-')
 		if (!parse_options(*args, &empty))
-			return ;
+			return (EXIT_FAILURE);
 	if (!empty)
 		env_init(&modified_env, env);
 	else
@@ -76,4 +78,5 @@ void	builtin_env(char **args, char **env)
 	else
 		print_env(modified_env);
 	freestrarr(modified_env);
+	return (EXIT_SUCCESS);
 }

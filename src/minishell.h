@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/04 16:08:07 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/05 11:40:33 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # include <stdint.h>
 # include <stdbool.h>
 
-void	execute_line(char **args, char ***env);
+int		execute_line(char **args, char ***env);
 bool	search_path(char **args, char **env);
-void	launch_process(char **args, char **env);
+int		launch_process(char **args, char **env);
 void	env_init(char ***newenv, char **env);
 char	*ft_getenv(char *name, char **env);
 void	ft_putenv(char *string, char ***envptr);
@@ -37,12 +37,11 @@ size_t	shellvar_len(char *var, bool specialchars);
 bool	shellvar_equ(char *var1, char *var2, bool specialchars);
 void	malloc_error(void);
 char	*getcwd_static(void);
-void	builtin_exit(char **args);
-void	builtin_cd(char **args, char ***env);
-void	builtin_echo(char **args);
-void	builtin_setenv(char **args, char ***env);
-void	builtin_unsetenv(char **args, char **env);
-void	builtin_env(char **args, char **env);
+int		builtin_cd(char **args, char ***env);
+int		builtin_echo(char **args);
+int		builtin_setenv(char **args, char ***env);
+int		builtin_unsetenv(char **args, char **env);
+int		builtin_env(char **args, char **env);
 int		get_shlvl(char **env);
 char	*join_path(char *left, char *right);
 
