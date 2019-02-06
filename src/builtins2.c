@@ -6,19 +6,19 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:51:25 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/04 20:04:40 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/06 08:07:37 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env(char **env)
+static void	print_env(char **env)
 {
 	while (*env)
 		ft_putendl(*env++);
 }
 
-int		builtin_setenv(char **args, char ***env)
+int			builtin_setenv(char **args, char ***env)
 {
 	if (args[0] && args[1] && args[2] && args[3])
 		ft_putstr_fd("setenv: Too many arguments.\n", 2);
@@ -29,7 +29,7 @@ int		builtin_setenv(char **args, char ***env)
 	return (EXIT_SUCCESS);
 }
 
-int		builtin_unsetenv(char **args, char **env)
+int			builtin_unsetenv(char **args, char **env)
 {
 	if (!*args++ || !*args)
 		ft_putstr_fd("unsetenv: Too few arguments.\n", 2);
@@ -38,34 +38,35 @@ int		builtin_unsetenv(char **args, char **env)
 	return (EXIT_SUCCESS);
 }
 
-bool	parse_options(char *options, bool *empty)
+static bool	parse_options(char ***args, bool *empty)
 {
-	while (*++options)
+	char *options;
+
+	while (*++*args && (options = **args)[0] == '-')
 	{
-		if (*options == 'i')
-			*empty = true;
-		else
+		while (*++options)
 		{
-			ft_dprintf(2, "env: invalid option -- '%c'\n", *options);
-			return (false);
+			if (*options == 'i')
+				*empty = true;
+			else
+			{
+				ft_dprintf(2, "env: invalid option -- '%c'\n", *options);
+				return (false);
+			}
 		}
 	}
 	return (true);
 }
 
-int		builtin_env(char **args, char **env)
+int			builtin_env(char **args, char **env)
 {
 	char	**modified_env;
 	bool	empty;
 
 	empty = false;
-	while (*++args && (*args)[0] == '-')
-		if (!parse_options(*args, &empty))
-			return (EXIT_FAILURE);
-	if (!empty)
-		env_init(&modified_env, env);
-	else
-		env_init(&modified_env, NULL);
+	if (!parse_options(&args, &empty))
+		return (EXIT_FAILURE);
+	env_init(&modified_env, empty ? NULL : env);
 	while (*args && ft_strchr(*args, '='))
 		ft_putenv(ft_strdup(*args++), &modified_env);
 	if (*args)
