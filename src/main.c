@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/05 11:11:10 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/06 15:41:07 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		main(int ac, char **av, char **envp)
 	exit_status = EXIT_SUCCESS;
 	env_init(&env, envp);
 	ft_setenv("PWD", getcwd_static(), &env);
+	ft_setenv("OLDPWD", getcwd_static(), &env);
 	ft_setenv("SHLVL", ft_itoa_static(get_shlvl(env) + 1), &env);
 	if (!ft_getenv("PATH", env))
 		ft_setenv("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin", &env);

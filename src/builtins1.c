@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:01:32 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/06 13:07:27 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/06 15:46:04 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	parse_options(char ***args, bool *follow_symlink)
 {
 	char *options;
 
-	while (*++*args && (options = **args)[0] == '-')
+	while (*++*args && (options = **args)[0] == '-' && options[1])
 	{
 		while (*++options)
 			if (*options != 'L' && *options != 'P')
@@ -89,6 +89,8 @@ static bool	cd_resolve_symlink(char *target_dir, char ***env)
 {
 	char *cwd;
 
+	if (!*target_dir)
+		return (true);
 	cwd = getcwd_static();
 	if (chdir(target_dir) != 0)
 		return (false);
@@ -104,16 +106,13 @@ int			builtin_cd(char **args, char ***env)
 
 	follow_symlink = true;
 	parse_options(&args, &follow_symlink);
-	if (!(target_dir = *args))
+	if (!(target_dir = *args) && !(target_dir = ft_getenv("HOME", *env)))
 	{
-		if (!(target_dir = ft_getenv("HOME", *env)))
-		{
-			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-			return (EXIT_FAILURE);
-		}
-		if (target_dir[0] == '\0')
-			return (EXIT_SUCCESS);
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		return (EXIT_FAILURE);
 	}
+	if (ft_strequ(target_dir, "-"))
+		target_dir = ft_getenv("OLDPWD", *env);
 	char *abspath = ft_strdup(ft_getenv("PWD", *env));
 	if ((follow_symlink && cd_follow_symlink(target_dir, abspath, env)) ||
 			(!follow_symlink && cd_resolve_symlink(target_dir, env)))
