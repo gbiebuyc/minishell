@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/06 15:41:07 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/06 16:59:02 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	shell_loop(char ***env, int *exit_status)
 			tilde_expansion(args);
 			param_expansion(args, *env);
 			if (ft_strequ(args[0], "exit"))
-				loop = false;
+				*exit_status = builtin_exit(args, &loop, *exit_status);
 			else
 				*exit_status = execute_line(args, env);
 			freestrarr(args);
