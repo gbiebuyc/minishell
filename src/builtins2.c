@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:51:25 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/06 08:07:37 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/06 16:08:16 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int			builtin_env(char **args, char **env)
 {
 	char	**modified_env;
 	bool	empty;
+	int		ret_val;
 
 	empty = false;
 	if (!parse_options(&args, &empty))
@@ -69,15 +70,19 @@ int			builtin_env(char **args, char **env)
 	env_init(&modified_env, empty ? NULL : env);
 	while (*args && ft_strchr(*args, '='))
 		ft_putenv(ft_strdup(*args++), &modified_env);
+	ret_val = EXIT_SUCCESS;
 	if (*args)
 	{
 		if (ft_strchr(args[0], '/') || search_path(args, env))
-			launch_process(args, modified_env);
+			ret_val = launch_process(args, modified_env);
 		else
+		{
 			ft_dprintf(2, "%s: No such file or directory\n", args[0]);
+			ret_val = EXIT_FAILURE;
+		}
 	}
 	else
 		print_env(modified_env);
 	freestrarr(modified_env);
-	return (EXIT_SUCCESS);
+	return (ret_val);
 }
