@@ -6,13 +6,13 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:24:58 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/07 08:45:42 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/07 08:54:05 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			builtin_echo(char **args)
+int		builtin_echo(char **args)
 {
 	bool	trailing_newline;
 
