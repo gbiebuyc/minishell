@@ -1,16 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins3.c                                        :+:      :+:    :+:   */
+/*   builtin_echo_exit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 16:24:58 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/06 17:27:54 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/07 08:45:42 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int			builtin_echo(char **args)
+{
+	bool	trailing_newline;
+
+	trailing_newline = true;
+	if (!*args++ || !*args)
+		ft_putchar('\n');
+	else
+	{
+		if (ft_strequ(*args, "-n"))
+		{
+			trailing_newline = false;
+			args++;
+		}
+		while (*args)
+		{
+			ft_putstr(*args);
+			if (*(args + 1))
+				ft_putchar(' ');
+			else if (trailing_newline)
+				ft_putchar('\n');
+			args++;
+		}
+	}
+	return (EXIT_SUCCESS);
+}
 
 int		builtin_exit(char **args, bool *loop, int exit_status)
 {
