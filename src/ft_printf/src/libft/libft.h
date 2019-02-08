@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 16:11:33 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/05 18:08:48 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/07 21:10:42 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,5 @@ intmax_t		ft_min(intmax_t a, intmax_t b);
 intmax_t		ft_max(intmax_t a, intmax_t b);
 intmax_t		ft_abs(intmax_t n);
 uintmax_t		ft_pow(unsigned int x, unsigned int y);
-char			get_next_opt(char ***argvptr);
 
 #endif

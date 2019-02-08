@@ -6,7 +6,7 @@
 #    By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/03 15:37:26 by gbiebuyc          #+#    #+#              #
-#    Updated: 2019/02/05 18:09:11 by gbiebuyc         ###   ########.fr        #
+#    Updated: 2019/02/07 21:10:53 by gbiebuyc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,6 @@ SRC = ft_atoi.c \
 	  freestrarr.c \
 	  dupstrarr.c \
 	  get_next_line.c \
-	  get_next_opt.c \
 	  ft_atof.c \
 	  ft_itoa_static.c \
 	  ft_min.c \
