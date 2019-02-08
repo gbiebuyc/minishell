@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/04 16:06:56 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/08 09:13:43 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,16 @@ void	ft_putenv(char *string, char ***envptr)
 void	ft_setenv(char *name, char *value, char ***env)
 {
 	char	*string;
+	size_t	value_len;
 
+	if (!name || !value)
+		return ;
+	value_len = ft_strlen(value);
+	if (value_len > 0 && value[0] == '"' && value[value_len - 1] == '"')
+	{
+		value[value_len - 1] = '\0';
+		value++;
+	}
 	if (!(string = malloc(ft_strlen(name) + 1 + ft_strlen(value) + 1)))
 		malloc_error();
 	ft_strcat(ft_strcat(ft_strcpy(string, name), "="), value);
