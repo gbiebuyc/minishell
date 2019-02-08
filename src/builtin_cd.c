@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:01:32 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/07 08:43:54 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/08 07:58:23 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,20 @@ static bool	cd_resolve_symlink(char *target_dir, char ***env)
 	return (true);
 }
 
+static char	*get_target_path(char *arg, char **env)
+{
+	char *ret;
+
+	if (ft_strequ(arg, "-"))
+	{
+		if (!(ret = ft_getenv("OLDPWD", env)))
+			ft_putstr_fd("minishell: cd: OLDPWD not set\n", STDERR_FILENO);
+	}
+	else if (!(ret = arg ? arg : ft_getenv("HOME", env)))
+		ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
+	return (ret);
+}
+
 int			builtin_cd(char **args, char ***env)
 {
 	char	*target_dir;
@@ -82,18 +96,11 @@ int			builtin_cd(char **args, char ***env)
 
 	follow_symlink = true;
 	parse_options(&args, &follow_symlink);
-	if (!(target_dir = *args))
-		if (!(target_dir = ft_getenv("HOME", *env)))
-		{
-			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-			return (EXIT_FAILURE);
-		}
-	if (ft_strequ(target_dir, "-"))
-		target_dir = ft_getenv("OLDPWD", *env);
+	if (!(target_dir = get_target_path(*args, *env)))
+		return (EXIT_FAILURE);
 	if ((follow_symlink && cd_follow_symlink(target_dir,
 					ft_strdup(ft_getenv("PWD", *env)), env)) ||
-			(!follow_symlink &&
-			cd_resolve_symlink(target_dir, env)))
+			(!follow_symlink && cd_resolve_symlink(target_dir, env)))
 		return (EXIT_SUCCESS);
 	if (access(target_dir, F_OK) == -1)
 		ft_dprintf(2, "cd: no such file or directory: %s\n", target_dir);
