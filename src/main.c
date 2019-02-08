@@ -49,9 +49,9 @@ int		main(int ac, char **av, char **envp)
 	(void)av;
 	exit_status = EXIT_SUCCESS;
 	env_init(&env, envp);
-	ft_setenv("PWD", getcwd_static(), &env);
-	ft_setenv("OLDPWD", getcwd_static(), &env);
 	ft_setenv("SHLVL", ft_itoa_static(get_shlvl(env) + 1), &env);
+	if (!ft_getenv("PWD", env))
+		ft_setenv("PWD", getcwd_static(), &env);
 	if (!ft_getenv("PATH", env))
 		ft_setenv("PATH", "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin", &env);
 	shell_loop(&env, &exit_status);
