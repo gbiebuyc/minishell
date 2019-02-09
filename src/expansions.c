@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:44:42 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/04 15:44:39 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/09 10:06:29 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ char	*expand_one_token_param(char *token, char **env)
 	token += shellvar_len(token, false);
 	token += (*token == '}') ? 1 : 0;
 	right_start = token;
-	if (!(new = malloc(left_len + ft_strlen(subst) +
-					ft_strlen(right_start) + 1)))
-		malloc_error();
+	new = malloc(left_len + ft_strlen(subst) + ft_strlen(right_start) + 1);
+	assert(new);
 	new[0] = '\0';
 	ft_strncat(new, tokencpy, left_len);
 	ft_strcat(ft_strcat(new, subst), right_start);

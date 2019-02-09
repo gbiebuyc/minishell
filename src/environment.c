@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/08 09:13:43 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/09 10:05:03 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	env_init(char ***new, char **env)
 {
 	if (env)
 	{
-		if (!(*new = dupstrarr(env)))
-			malloc_error();
+		*new = dupstrarr(env);
+		assert(*new);
 	}
 	else
 	{
-		if (!(*new = malloc(sizeof(**new))))
-			malloc_error();
+		*new = malloc(sizeof(**new));
+		assert(*new);
 		(*new)[0] = NULL;
 	}
 }
@@ -55,8 +55,8 @@ void	ft_putenv(char *string, char ***envptr)
 		}
 		i++;
 	}
-	if (!(*envptr = malloc(sizeof(char*) * (i + 2))))
-		malloc_error();
+	*envptr = malloc(sizeof(char*) * (i + 2));
+	assert(*envptr);
 	ft_memcpy(*envptr, env, sizeof(char*) * i);
 	free(env);
 	(*envptr)[i] = string;
@@ -76,8 +76,8 @@ void	ft_setenv(char *name, char *value, char ***env)
 		value[value_len - 1] = '\0';
 		value++;
 	}
-	if (!(string = malloc(ft_strlen(name) + 1 + ft_strlen(value) + 1)))
-		malloc_error();
+	string = malloc(ft_strlen(name) + 1 + ft_strlen(value) + 1);
+	assert(string);
 	ft_strcat(ft_strcat(ft_strcpy(string, name), "="), value);
 	ft_putenv(string, env);
 }

@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 23:14:56 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/07 08:34:27 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/09 11:17:32 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ bool	search_path(char **args, char **env)
 		{
 			free(args[0]);
 			args[0] = ft_strdup(paths[i]);
+			assert(args[0]);
 			freestrarr(paths);
 			return (true);
 		}
