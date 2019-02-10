@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:51:25 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/07 08:44:59 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/10 22:58:33 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			builtin_setenv(char **args, char ***env)
 {
 	if (args[0] && args[1] && args[2] && args[3])
 		ft_putstr_fd("setenv: Too many arguments.\n", 2);
-	else if (args[0] && args[1] && args[2])
+	else if (args[0] && args[1])
 		ft_setenv(args[1], args[2], env);
 	else
 		print_env(*env);

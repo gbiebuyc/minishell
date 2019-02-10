@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/09 10:05:03 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/10 22:55:47 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ void	ft_setenv(char *name, char *value, char ***env)
 	char	*string;
 	size_t	value_len;
 
-	if (!name || !value)
+	if (!name)
 		return ;
+	if (!value)
+		value = "";
 	value_len = ft_strlen(value);
 	if (value_len > 0 && value[0] == '"' && value[value_len - 1] == '"')
 	{
