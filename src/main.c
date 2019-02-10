@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:05:24 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/07 21:02:52 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/10 23:42:02 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	shell_loop(char ***env, int *exit_status)
 	{
 		ft_printf("{green}{bold}%s{eoc}> ", ft_getenv("PWD", *env));
 		if (get_next_line(STDIN_FILENO, &line) <= 0)
-			break ;
+			return (ft_putstr("Bye\n"));
 		args = NULL;
 		if (line[0] && (args = ft_strsplit(line, ' ')) && args[0])
 		{
