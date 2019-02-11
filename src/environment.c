@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 20:04:54 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/10 22:55:47 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/11 08:05:50 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ void	env_init(char ***new, char **env)
 
 char	*ft_getenv(char *name, char **env)
 {
+	int	name_len;
+
+	name_len = len_till_special_char(name);
 	while (*env)
 	{
-		if (shellvar_equ(name, *env, false))
-			return (ft_strchr(*env, '=') + 1);
+		if (len_till_first_equ(*env) == name_len &&
+				ft_strnequ(name, *env, name_len))
+			return (*env + name_len + 1);
 		env++;
 	}
 	return (NULL);
@@ -42,12 +46,16 @@ void	ft_putenv(char *string, char ***envptr)
 {
 	int		i;
 	char	**env;
+	int		name_len;
 
+	if ((name_len = len_till_last_equ(string)) <= 0)
+		return ;
 	env = *envptr;
 	i = 0;
 	while (env[i])
 	{
-		if (shellvar_equ(string, env[i], true))
+		if (len_till_first_equ(env[i]) == name_len &&
+				ft_strnequ(string, env[i], name_len))
 		{
 			free(env[i]);
 			env[i] = string;
@@ -87,11 +95,14 @@ void	ft_setenv(char *name, char *value, char ***env)
 void	ft_unsetenv(char *name, char **env)
 {
 	bool	found;
+	int		name_len;
 
+	name_len = ft_strlen(name);
 	found = false;
 	while (*env)
 	{
-		if (!found && shellvar_equ(name, *env, true))
+		if (!found && len_till_first_equ(*env) == name_len &&
+				ft_strnequ(name, *env, name_len))
 			found = true;
 		if (found)
 			*env = *(env + 1);

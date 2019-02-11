@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   variables.c                                        :+:      :+:    :+:   */
+/*   var_lengths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 16:06:14 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/04 16:07:05 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/11 07:56:00 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	shellvar_len(char *var, bool specialchars)
+int		len_till_special_char(char *var)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (specialchars ? (var[i] && var[i] != '=') :
-			(ft_isalnum(var[i]) || var[i] == '_'))
+	while (ft_isalnum(var[i]) || var[i] == '_')
 		i++;
 	return (i);
 }
 
-bool	shellvar_equ(char *var1, char *var2, bool specialchars)
+int		len_till_first_equ(char *s)
 {
-	size_t	len;
+	char *equ_sign;
 
-	len = shellvar_len(var2, true);
-	if (len != shellvar_len(var1, specialchars))
-		return (false);
-	return (ft_strnequ(var1, var2, len));
+	if (!s || !(equ_sign = ft_strchr(s, '=')))
+		return (-1);
+	return ((int)(equ_sign - s));
+}
+
+int		len_till_last_equ(char *s)
+{
+	char *equ_sign;
+
+	if (!s || !(equ_sign = ft_strrchr(s, '=')))
+		return (-1);
+	return ((int)(equ_sign - s));
 }

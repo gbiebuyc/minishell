@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 12:06:28 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/09 10:08:25 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/11 01:47:31 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ void	ft_setenv(char *name, char *value, char ***env);
 void	ft_unsetenv(char *name, char **env);
 void	tilde_expansion(char **env);
 void	param_expansion(char **tokens, char **env);
-size_t	shellvar_len(char *var, bool specialchars);
-bool	shellvar_equ(char *var1, char *var2, bool specialchars);
+int		len_till_special_char(char *var);
+int		len_till_first_equ(char *s);
+int		len_till_last_equ(char *s);
 char	*getcwd_static(void);
 int		builtin_cd(char **args, char ***env);
 int		builtin_echo(char **args);
