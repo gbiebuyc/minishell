@@ -6,7 +6,7 @@
 /*   By: gbiebuyc <gbiebuyc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:01:32 by gbiebuyc          #+#    #+#             */
-/*   Updated: 2019/02/08 07:58:23 by gbiebuyc         ###   ########.fr       */
+/*   Updated: 2019/02/11 08:38:58 by gbiebuyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,15 @@ int			builtin_cd(char **args, char ***env)
 	parse_options(&args, &follow_symlink);
 	if (!(target_dir = get_target_path(*args, *env)))
 		return (EXIT_FAILURE);
-	if ((follow_symlink && cd_follow_symlink(target_dir,
-					ft_strdup(ft_getenv("PWD", *env)), env)) ||
-			(!follow_symlink && cd_resolve_symlink(target_dir, env)))
+	if (follow_symlink)
+	{
+		if (!ft_getenv("PWD", *env))
+			ft_setenv("PWD", getcwd_static(), env);
+		if (cd_follow_symlink(target_dir,
+					ft_strdup(ft_getenv("PWD", *env)), env))
+			return (EXIT_SUCCESS);
+	}
+	else if (cd_resolve_symlink(target_dir, env))
 		return (EXIT_SUCCESS);
 	if (access(target_dir, F_OK) == -1)
 		ft_dprintf(2, "cd: no such file or directory: %s\n", target_dir);
